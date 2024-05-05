@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <link rel="stylesheet" href="static/style.css"> 
+
+</head>
+<body>
+    <img src="static/imagens/logo-sem-fundo.png" alt="" class="logo"> 
+    <h1>Controle de Estoque de Gelo Saborizado</h1>
+    <table>
+        <tr>
+            <th class="sabor_titulo">Sabor</th>
+            <th class="total_titulo">Total em Estoque</th>
+        </tr>
+        {% for sabor, quantidade in estoque.items() %}
+        <tr>
+            <td class="sabor">{{ sabor }}</td>
+            <td class="total">{{ quantidade }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="total">
+            <td class="sabor">TOTAL</td>
+            <td class="total">{{ total }}</td>
+        </tr>
+    </table>
+    <h2>Adicionar ao Estoque</h2>
+    <form action="/adicionar" method="post">
+        <select name="sabor">
+            {% for sabor in estoque.keys() %}
+            <option value="{{ sabor }}">{{ sabor }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="quantidade" placeholder="Quantidade" required>
+        <button type="submit">Adicionar</button>
+    </form>
+    <h2>Remover do Estoque</h2>
+    <form action="/remover" method="post">
+        <select name="sabor">
+            {% for sabor in estoque.keys() %}
+            <option value="{{ sabor }}">{{ sabor }}</option>
+            {% endfor %}
+        </select>
+        <input type="number" name="quantidade" placeholder="Quantidade" required>
+        <button type="submit">Remover</button>
+    </form>
+</body>
+</html>
+
+
